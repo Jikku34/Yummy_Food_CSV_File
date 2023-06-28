@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Search</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+            text-decoration: none;
+            list-style: none;
+            scroll-behavior: smooth;
+
+        }
+
+        body {
+            background: linear-gradient(155deg, #55c7ed23, #5b2be03a, #3bc0ed34);
+        }
+
+        .imgdis {
+            margin-left: 60px;
+        }
+
+        .Gallerybar {
+            display: flex;
+            width: 100%;
+
+        }
+
+        .box {
+            display: block;
+            background-color: rgba(192, 212, 212, 0.555);
+            float: left;
+            width: 250px;
+            height: 250px;
+            margin-left: 50px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding: 10px 5px;
+            border-radius: 1rem;
+
+        }
+
+        .box:hover {
+            transform: scale(1.002, 1.02);
+            transition: .1s transform;
+            background-color: rgb(192, 212, 212);
+            box-shadow: 10px 15px 20px rgb(0, 0, 0, .2);
+        }
+
+        #search {
+            margin-left: 310px;
+            margin-top: 30px;
+            width: 600px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+
+        }
+
+        #search-bt {
+            margin-top: 30px;
+            width: 120px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div style="display: block;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="food_search" id="search" required>
+            <button type="submit" id="search-bt">Search</button>
+        </form>
+
+        <div class="Gallerybar">
+            <div class="imgdis">
+                {% if action == 'Result' %}
+                {% for y in shop_details %}
+                {% for x in shop_rate %}
+                {% if y.shop_id == x.shop_id %}
+                <div class="box">
+                    <br>
+                    <h2 style="text-align: center;font-size: large;">{{y.name}}</h2>
+                    <br>
+                    <h5
+                        style="margin-left: 70px;text-align: center; color: #471010b6; padding: 10px 5px 10px 10px; background-color: rgba(56, 70, 70, 0.301); width: 100px;border-radius: 5px;">
+                        {{x.price}}</h5>
+                    <br>
+                    <h5 style="text-align: center;">Cuisines: {{y.cuisines}}</h5>
+                    <br>
+                    <h5 style="text-align: center;">{{ y.location }}</h5>
+                    <br>
+                    <h5 style="text-align: center;">Votes: {{ x.votes }}</h5>
+                    <br>
+                    <h5 style="text-align: center;">Aggregate Rating{{ x.aggregate_rating }}</h5>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                {% else %}
+                <h2 style="text-align: center;">OOps</h2>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+        * {
+            font-family: Roboto, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .flexbox {
+            background: linear-gradient(155deg, #55c7ed23, #5b2be03a, #3bc0ed34);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search {
+            margin: 20px;
+
+        }
+
+        .search>h3 {
+            font-weight: normal;
+        }
+
+        .search>h1,
+        .search>h3 {
+            color: rgb(67, 61, 88);
+            margin-bottom: 15px;
+            text-shadow: 0 1px #102c1e;
+        }
+
+        .search>div {
+            display: inline-block;
+            position: relative;
+            filter: drop-shadow(0 1px #00c2810e);
+        }
+
+        .search>div:after {
+            content: "";
+            background: rgba(81, 71, 105, 0);
+            width: 4px;
+            height: 20px;
+            position: absolute;
+            top: 40px;
+            right: 2px;
+            transform: rotate(135deg);
+        }
+
+        .search>div>form>input {
+            color: rgb(27, 21, 21);
+            font-size: 16px;
+            background: transparent;
+            width: 25px;
+            height: 25px;
+            padding: 10px;
+            border: solid 3px rgb(83, 80, 109);
+            outline: none;
+            border-radius: 35px;
+            transition: width 0.5s;
+
+        }
+
+        .search>div>form>input::placeholder {
+            color: #231924;
+            opacity: 0;
+            transition: opacity 150ms ease-out;
+        }
+
+        .search>div>form>input:focus::placeholder {
+            opacity: 1;
+        }
+
+        .search>div>form>input:focus,
+        .search>div>form>input:not(:placeholder-shown) {
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexbox">
+        <div class="search">
+            <h1>Welcome to Yummy Foods</h1>
+            {% block food_head %}{% endblock %}
+
+            <div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                {% block input %}{% endblock %}
+
+                <button type="submit"
+                    style="width: 100px;height: 40px; background-color: #23192465; border: none;outline: none;border-radius: 10px;">Search</button>
+                </form>
+            </div>
+            <br>
+            <br>
+            {% block nav_link %}{% endblock %}
+
+        </div>
+    </div>
+
+</body>
+
+</html>

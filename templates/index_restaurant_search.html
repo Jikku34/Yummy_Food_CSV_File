@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block title %} Search Restaurant{% endblock %}
+{% block food_head %}
+<h3>Make Good Memories, Search Your Favorite Restaurant</h3>
+{% endblock %}
+{% block input %}
+<input type="text" name="restaurant_search" placeholder="Find your Restaurant. . ." required>
+{% endblock %}
+{% block nav_link %}
+<a href="{% url 'home_food' %}" style="text-decoration: none; color: #231924;">Search Favorite Food</a>
+{% endblock %}
